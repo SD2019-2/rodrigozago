@@ -1,0 +1,24 @@
+Metadata-Version: 1.0
+Name: PyORBit
+Version: @VERSION@
+Summary: Python bindings for the ORBit2 CORBA ORB
+Home-page: http://www.daa.com.au/~james/software/pygtk/
+Author: James Henstridge
+Author-email: james@daa.com.au
+License: GNU LGPL
+Download-url: http://ftp.gnome.org/pub/GNOME/sources/pyorbit/2.0/pyorbit-@VERSION@.tar.gz
+Description: PyORBit is a binding for the ORBit2 CORBA ORB.  It aims
+        to be compatible with the Python language mapping standard
+        (http://www.omg.org/cgi-bin/doc?formal/02-09-07), implementing
+        both the client side and server side bindings.
+        PyORBit is capable of calling methods of in-process ORBit
+        servers implemented in C, and being called by C code.
+Platform: POSIX
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: C
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Object Brokering :: CORBA

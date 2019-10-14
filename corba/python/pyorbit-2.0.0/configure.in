@@ -1,0 +1,84 @@
+dnl -*- mode: autoconf -*-
+AC_PREREQ(2.52)
+
+m4_define(pyorbit_major_version, 2)
+m4_define(pyorbit_minor_version, 0)
+m4_define(pyorbit_micro_version, 0)
+m4_define(pyorbit_version, pyorbit_major_version.pyorbit_minor_version.pyorbit_micro_version)
+
+m4_define(orbit2_required_version, 2.4.4)
+
+AC_INIT([pyorbit], [pyorbit_version],
+        [http://bugzilla.gnome.org/enter_bug.cgi?product=pyorbit])
+
+AC_DEFINE([PYORBIT_MAJOR_VERSION], [pyorbit_major_version],
+          [PyORBit major version])
+AC_DEFINE([PYORBIT_MINOR_VERSION], [pyorbit_minor_version],
+          [PyORBit minor version])
+AC_DEFINE([PYORBIT_MICRO_VERSION], [pyorbit_micro_version],
+          [PyORBit micro version])
+
+# used in the spec file ...
+ORBIT2_REQUIRED_VERSION=orbit2_required_version
+AC_SUBST([ORBIT2_REQUIRED_VERSION])
+
+AC_CONFIG_SRCDIR([src/pyorbit.h])
+AM_CONFIG_HEADER([config.h])
+AM_INIT_AUTOMAKE
+
+AC_DISABLE_STATIC
+AC_PROG_LIBTOOL
+
+AM_PATH_PYTHON(2.2)
+
+AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
+
+PKG_CHECK_MODULES([PYORBIT], [ORBit-2.0 >= orbit2_required_version])
+
+# link with the imodule service if it is available
+AC_MSG_CHECKING([for the ORBit2 imodule service])
+if AC_RUN_LOG([$PKG_CONFIG --print-errors --exists ORBit-imodule-2.0]); then
+   AC_MSG_RESULT([found])
+   PYORBIT_CFLAGS=`$PKG_CONFIG --cflags ORBit-imodule-2.0`
+   PYORBIT_LIBS=`$PKG_CONFIG --libs ORBit-imodule-2.0`
+   AC_DEFINE([HAVE_ORBIT2_IMODULE],,
+             [have support for the ORBit2 imodule service])
+else
+   AC_MSG_RESULT([not found])
+fi
+
+# get rid of the -export-dynamic stuff from the configure flags ...
+export_dynamic=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
+if test -n "$export_dynamic"; then
+  PYORBIT_LIBS=`echo $PYORBIT_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
+AC_SUBST([PYORBIT_CFLAGS])
+AC_SUBST([PYORBIT_LIBS])
+
+# add debugging options ...
+changequote(,)dnl
+if test "x$GCC" = xyes; then
+  case " $CFLAGS " in
+  *[\	\ ]-Wall[\	\ ]*) ;;
+  *) CFLAGS="$CFLAGS -Wall" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\	\ ]-std=c9x[\	\ ]*) ;;
+  *) CFLAGS="$CFLAGS -std=c9x" ;;
+  esac
+fi
+changequote([,])dnl
+
+AC_CONFIG_FILES([
+  Makefile
+  src/Makefile
+  tests/Makefile
+  tests/c-inproc/Makefile
+  pyorbit-2.pc
+  pyorbit.spec
+  PKG-INFO
+])
+
+AC_OUTPUT

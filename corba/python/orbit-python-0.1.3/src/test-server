@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+import CORBA
+
+class Instance:
+	def __init__(self, fruit):
+		self.fruit = fruit
+		self.left = 100
+
+	def bite(self, size):
+		if self.left - size < 0:
+			exdata = Fruit.Instance.BigBite(too_much_by = size - self.left)
+			raise Fruit.Instance.BigBite, exdata
+			return
+
+		self.left = self.left - size
+		print "Eating %d%%, %d%% left" % (size, self.left)
+		if self.left == 0:
+			raise Fruit.Instance.AllEaten
+
+	def throw_out(self):
+		print "Client threw me (%s) in garbage!" % self.fruit.name
+		poa.deactivate_object(self._servant)
+
+
+class Factory:
+	def __init__(self):
+		self.fruit_list = []
+
+	def add_fruit(self, f):
+		for fruit in self.fruit_list:
+			if fruit.name == f.name:
+				raise Fruit.Factory.AlreadyExists
+				return
+		self.fruit_list.append(f)
+
+	def get_instance(self, fruit):
+		new_instance = POA.Fruit.Instance(Instance(fruit))
+		poa.activate_object(new_instance)
+		return poa.servant_to_reference(new_instance)
+
+	def get_random_fruit(self):
+		import random
+		index = random.randint(0, len(self.fruit_list) - 1)
+		return index, self.fruit_list[index]
+
+	def test_union(self, color):
+		if color == Fruit.orange:
+			return Fruit.Factory.TestUnion(color, "foobar")
+		elif color == Fruit.red:
+			return Fruit.Factory.TestUnion(color, 42)
+		elif color == Fruit.yellow:
+			return Fruit.Factory.TestUnion(color, 2.71828)
+		elif color == Fruit.green:
+			return Fruit.Factory.TestUnion(color, CORBA.TRUE)
+
+	def test_any(self):
+		import random
+		pick = random.randint(0, 2)
+		if pick == 0:
+			return CORBA.Any(CORBA.TypeCode("IDL:CORBA/String:1.0"), "abc123")
+		elif pick == 1:
+			return CORBA.Any(CORBA.TypeCode("IDL:CORBA/Short:1.0"), 42)
+		elif pick == 2:
+			new_props = Fruit.Properties(name = "pineapple", color = Fruit.yellow)
+			return CORBA.Any(CORBA.TypeCode(new_props), new_props)
+		
+
+CORBA.load_idl("test-suite.idl")
+CORBA.load_idl("/usr/share/idl/name-service.idl")
+orb = CORBA.ORB_init((), CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+
+servant = POA.Fruit.Factory(Factory())
+poa.activate_object(servant)
+ref = poa.servant_to_reference(servant)
+open("./test-server.ior", "w").write(orb.object_to_string(ref))
+
+poa.the_POAManager.activate()
+orb.run()

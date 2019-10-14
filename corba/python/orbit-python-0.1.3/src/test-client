@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+
+import CORBA
+import sys
+
+CORBA.load_idl("test-suite.idl")
+orb = CORBA.ORB_init((), CORBA.ORB_ID)
+ior = open("./test-server.ior").readline()
+o = orb.string_to_object(ior)
+print o.__repo_id
+try:
+	o.add_fruit(Fruit.Properties(name = "orange", color = Fruit.orange))
+	o.add_fruit(Fruit.Properties(name = "banana", color = Fruit.yellow))
+	o.add_fruit(Fruit.Properties(name = "apple", color = Fruit.red))
+	o.add_fruit(Fruit.Properties(name = "lime", color = Fruit.green))
+except: pass
+
+for fruit in o.fruit_list:
+	print "%s is %s" % (fruit.name, Fruit.Color[fruit.color])
+
+i = o.get_instance(o.fruit_list[0])
+print "I've an instance of an", i.fruit.name
+i.bite(50)
+try: i.bite(60)
+except Fruit.Instance.BigBite, exd:
+	try: i.bite(60 - exd.too_much_by)
+	except Fruit.Instance.AllEaten:
+		print "I'm done eating my %s; throwing it out" % i.fruit.name
+		i.throw_out()
+
+print "Pi is", Fruit.Factory.pi
+r = o.get_random_fruit()
+print "Random fruit of the day: %s (at index %d)" % (r[1].name, r[0])
+
+union = o.test_union(Fruit.orange)
+print "Testing union: discriminate:", union.d, "-- value:", union.v
+print "Testing any:", o.test_any()

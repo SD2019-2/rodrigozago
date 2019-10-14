@@ -1,0 +1,393 @@
+# Makefile.in generated automatically by automake 1.4 from Makefile.am
+
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DESTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+AS = @AS@
+CC = @CC@
+DLLTOOL = @DLLTOOL@
+GLIB_CFLAGS = @GLIB_CFLAGS@
+GLIB_CONFIG = @GLIB_CONFIG@
+GLIB_LIBS = @GLIB_LIBS@
+LD = @LD@
+LIBIDL_CFLAGS = @LIBIDL_CFLAGS@
+LIBIDL_CONFIG = @LIBIDL_CONFIG@
+LIBIDL_LIBS = @LIBIDL_LIBS@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
+MAINT = @MAINT@
+MAKEINFO = @MAKEINFO@
+NM = @NM@
+OBJDUMP = @OBJDUMP@
+OPT = @OPT@
+ORBIT_CFLAGS = @ORBIT_CFLAGS@
+ORBIT_CONFIG = @ORBIT_CONFIG@
+ORBIT_IDL = @ORBIT_IDL@
+ORBIT_LIBS = @ORBIT_LIBS@
+PACKAGE = @PACKAGE@
+PYTHON = @PYTHON@
+PYTHON_CFLAGS = @PYTHON_CFLAGS@
+PYTHON_INCLUDES = @PYTHON_INCLUDES@
+PYTHON_LINK = @PYTHON_LINK@
+RANLIB = @RANLIB@
+SO = @SO@
+VERSION = @VERSION@
+pyexecdir = @pyexecdir@
+pythondir = @pythondir@
+
+INCLUDES = $(PYTHON_INCLUDES) $(PYTHON_CFLAGS) $(ORBIT_CFLAGS)
+LIBS = $(ORBIT_LIBS) 
+
+pyexec_PROGRAMS = CORBAmodule$(SO) 
+
+CORBAmodule__SO__SOURCES = CORBAmodule.c CORBA_ORB.c CORBA_fixed.c 	CORBA_TypeCode.c CORBA_any.c idl.c client.c marshal.c 	PortableServer.c 	demarshal.c server.c except.c types.c 	CORBA_ORB.h CORBA_TypeCode.h CORBA_any.h CORBA_fixed.h 	CORBAmodule.h types.h PortableServer.h
+
+
+CORBAmodule__SO__LINK = $(PYTHON_LINK)
+CORBAmodule__SO__LDADD = $(ORBIT_LIBS) $(LIBIDL_LIBS)
+
+TESTS_ENVIRONMENT = PYTHONPATH=.
+TESTS = test.sh
+
+EXTRA_DIST = test.sh test-server test-client test-suite.idl
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_CLEAN_FILES = 
+PROGRAMS =  $(pyexec_PROGRAMS)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) 
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+CORBAmodule__SO__OBJECTS =  CORBAmodule.o CORBA_ORB.o CORBA_fixed.o \
+CORBA_TypeCode.o CORBA_any.o idl.o client.o marshal.o PortableServer.o \
+demarshal.o server.o except.o types.o
+CORBAmodule__SO__DEPENDENCIES = 
+CORBAmodule__SO__LDFLAGS = 
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = gtar
+GZIP_ENV = --best
+SOURCES = $(CORBAmodule__SO__SOURCES)
+OBJECTS = $(CORBAmodule__SO__OBJECTS)
+
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .S .c .lo .o .s
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps src/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-pyexecPROGRAMS:
+
+clean-pyexecPROGRAMS:
+	-test -z "$(pyexec_PROGRAMS)" || rm -f $(pyexec_PROGRAMS)
+
+distclean-pyexecPROGRAMS:
+
+maintainer-clean-pyexecPROGRAMS:
+
+install-pyexecPROGRAMS: $(pyexec_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(pyexecdir)
+	@list='$(pyexec_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(pyexecdir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(pyexecdir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	  else :; fi; \
+	done
+
+uninstall-pyexecPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(pyexec_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(pyexecdir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	done
+
+.c.o:
+	$(COMPILE) -c $<
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+.c.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+.s.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+.S.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+
+maintainer-clean-libtool:
+
+CORBAmodule$(SO): $(CORBAmodule__SO__OBJECTS) $(CORBAmodule__SO__DEPENDENCIES)
+	@rm -f CORBAmodule$(SO)
+	$(CORBAmodule__SO__LINK) $(CORBAmodule__SO__LDFLAGS) $(CORBAmodule__SO__OBJECTS) $(CORBAmodule__SO__LDADD) $(LIBS)
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = src
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
+	done
+CORBA_ORB.o: CORBA_ORB.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+CORBA_TypeCode.o: CORBA_TypeCode.c CORBAmodule.h CORBA_ORB.h \
+	CORBA_TypeCode.h CORBA_any.h CORBA_fixed.h PortableServer.h \
+	types.h
+CORBA_any.o: CORBA_any.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+CORBA_fixed.o: CORBA_fixed.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+CORBAmodule.o: CORBAmodule.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+PortableServer.o: PortableServer.c CORBAmodule.h CORBA_ORB.h \
+	CORBA_TypeCode.h CORBA_any.h CORBA_fixed.h PortableServer.h \
+	types.h
+client.o: client.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+demarshal.o: demarshal.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+except.o: except.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+idl.o: idl.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h CORBA_any.h \
+	CORBA_fixed.h PortableServer.h types.h
+marshal.o: marshal.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+server.o: server.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h \
+	CORBA_any.h CORBA_fixed.h PortableServer.h types.h
+types.o: types.c CORBAmodule.h CORBA_ORB.h CORBA_TypeCode.h CORBA_any.h \
+	CORBA_fixed.h PortableServer.h types.h
+
+check-TESTS: $(TESTS)
+	@failed=0; all=0; \
+	srcdir=$(srcdir); export srcdir; \
+	for tst in $(TESTS); do \
+	  if test -f $$tst; then dir=.; \
+	  else dir="$(srcdir)"; fi; \
+	  if $(TESTS_ENVIRONMENT) $$dir/$$tst; then \
+	    all=`expr $$all + 1`; \
+	    echo "PASS: $$tst"; \
+	  elif test $$? -ne 77; then \
+	    all=`expr $$all + 1`; \
+	    failed=`expr $$failed + 1`; \
+	    echo "FAIL: $$tst"; \
+	  fi; \
+	done; \
+	if test "$$failed" -eq 0; then \
+	  banner="All $$all tests passed"; \
+	else \
+	  banner="$$failed of $$all tests failed"; \
+	fi; \
+	dashes=`echo "$$banner" | sed s/./=/g`; \
+	echo "$$dashes"; \
+	echo "$$banner"; \
+	echo "$$dashes"; \
+	test "$$failed" -eq 0
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am: install-pyexecPROGRAMS
+install-exec: install-exec-am
+
+install-data-am:
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-pyexecPROGRAMS
+uninstall: uninstall-am
+all-am: Makefile $(PROGRAMS)
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+installdirs:
+	$(mkinstalldirs)  $(DESTDIR)$(pyexecdir)
+
+
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+mostlyclean-am:  mostlyclean-pyexecPROGRAMS mostlyclean-compile \
+		mostlyclean-libtool mostlyclean-tags \
+		mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-pyexecPROGRAMS clean-compile clean-libtool clean-tags \
+		clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-pyexecPROGRAMS distclean-compile \
+		distclean-libtool distclean-tags distclean-generic \
+		clean-am
+	-rm -f libtool
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-pyexecPROGRAMS \
+		maintainer-clean-compile maintainer-clean-libtool \
+		maintainer-clean-tags maintainer-clean-generic \
+		distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: mostlyclean-pyexecPROGRAMS distclean-pyexecPROGRAMS \
+clean-pyexecPROGRAMS maintainer-clean-pyexecPROGRAMS \
+uninstall-pyexecPROGRAMS install-pyexecPROGRAMS mostlyclean-compile \
+distclean-compile clean-compile maintainer-clean-compile \
+mostlyclean-libtool distclean-libtool clean-libtool \
+maintainer-clean-libtool tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir check-TESTS info-am info \
+dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
+install-exec install-data-am install-data install-am install \
+uninstall-am uninstall all-redirect all-am all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

@@ -1,0 +1,72 @@
+2000-03-18  Jason Tackaberry <tack@linux.com>
+
+   * Ported the whole mess to C.  Aside from compiling 20% faster, it should
+     hopefully build properly on more platforms.  I've also (through some 
+     crude measurements) noticed a 5-10% speed increase.
+   * idl.c, except.c, types.c: fixed unions, structs, and exceptions so that
+     attributes set on construction are set for the instance object, not for
+     the class object. 
+   * Released 0.1.3
+
+2000-03-16  Jon Kåre Hellan <hellan@acm.org>
+
+   * idl.cc: pass IDL_parse_filename IDLF_CODEFRAGS which is required for
+     Gnumeric.idl
+
+2000-03-16  Jason Tackaberry <tack@linux.com>
+
+   * CORBA_ORB.cc: CORBA_ORB_PyObject__new properly accepts either lists or
+     tuples for parameter 1.
+   * CORBA_ORB.cc: resolve_initial_references handles RootPOA properly now
+   * CORBA_ORB.cc, CORBAmodule.cc: made ORB_init more conformant
+   * exceptions raised by check_corba_ex() now work properly
+
+2000-03-15  Jason Tackaberry <tack@linux.com>
+
+   * CORBA_ORB.cc: implemented CORBA::ORB::resolve_initial_references
+     (still need to handle RootPOA and POACurrent)
+   * idl.cc, CORBAmodule.cc: load_idl() now takes optional preprocessor
+     parameters to pass to IDL_parse_filename
+   * demarshal.cc: can demarshal generic Objects now.
+   * idl.cc, CORBAmodule.cc: now handles libIDL errors (such as missing file) 
+     gracefully by raising an exception.
+
+2000-03-14  Jason Tackaberry <tack@linux.com>
+
+   * CORBAmodule.h, idl.cc, marshal.cc, demarshal.cc: started adding debugging
+     output.  Set __DEBUG_LEVEL__ in CORBAmodule.h to enable (a 0 to 9 value).
+   * CORBAmodule.cc: CORBA_Object_to_PyObject returns Py_None if the passed
+     object is NULL rather than bailing out with an error.
+
+2000-03-14  Jason Tackaberry <tack@linux.com>
+
+   * CORBA_ORB.cc: fixed a stupid bug that caused a segfault with CVS ORBit, 
+     and as a result created one more FIXME item. :)
+   * Released 0.1.2
+
+2000-03-13  Jason Tackaberry <tack@linux.com>
+
+   * configure.in: forced precedence to g++ until I can fix the code to
+     compile properly with Sun's Workshop.  (Okay, it still doesn't work
+     properly.  I'm working on that.  Hack the Makefile to link in libgcc
+     in the meantime.)
+
+2000-03-13  Phil Dawes <philipd@users.sourceforge.net>
+
+   * idl.cc: fixed a buglet that stops it from compiling with gcc-2.95
+   * Added automake/autoconf support
+   * Added a 'make check' test target to the src directory
+   * Added an autogen.sh to generate the configure script and run it
+
+2000-03-12  Jason Tackaberry <tack@linux.com>
+
+   * PortableServermodule.[cc,h]: renamed to PortableServer.[cc,h] and the
+     module is initialized from CORBAmodule.cc.  This will eliminate the
+     shared library dependency problem between the two modules.
+   * Fixed a cosmetic bug in test-client
+   * Packaged this as version 0.1.1
+   
+
+2000-03-11  Jason Tackaberry <tack@linux.com>
+
+   * initial version (0.1.0) released
